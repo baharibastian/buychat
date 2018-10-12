@@ -15,11 +15,19 @@ func init() {
 	Router.HandleFunc("/user/{id:[0-9]+}", controller.ReadUser).Methods("GET")
 	Router.HandleFunc("/user/{id:[0-9]+}", controller.UpdateUser).Methods("PUT")
 	Router.HandleFunc("/users", controller.ReadUsers).Methods("GET")
-	Router.HandleFunc("/users/{id:[0-9]}", controller.DeleteUser).Methods("DELETE")
-	Router.HandleFunc("/users", controller.AddUser).Methods("POST")
-	Router.HandleFunc("/products/{id:[0-9]+}", controller.GetProduct).Methods("GET")
-	Router.HandleFunc("/products/{id:[0-9]+}", controller.UpdateProduct).Methods("PUT")
+	Router.HandleFunc("/merchants", controller.GetAllMerchants).Methods("GET")
+	Router.HandleFunc("/merchants/{merchant_id:[0-9]+}", controller.GetMerchant).Methods("GET")
 	Router.HandleFunc("/products", controller.GetAllProduct).Methods("GET")
+	Router.HandleFunc("/products/{product_id:[0-9]+}", controller.GetProduct).Methods("GET")
+
+	Router.HandleFunc("/users/{id:[0-9]}", controller.DeleteUser).Methods("DELETE")
 	Router.HandleFunc("/products/{id:[0-9]+}", controller.DeleteProduct).Methods("DELETE")
+	// Router.HandleFunc("/merchant/{id:[0-9]+}", controller.DeleteMerchant).Methods("DELETE")
+
+	Router.HandleFunc("/users", controller.AddUser).Methods("POST")
 	Router.HandleFunc("/products", controller.AddProduct).Methods("POST")
+	Router.HandleFunc("/merchants", controller.AddMerchant).Methods("POST")
+
+	Router.HandleFunc("/products/{id:[0-9]+}", controller.UpdateProduct).Methods("PUT")
+
 }
