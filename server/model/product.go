@@ -4,21 +4,22 @@ import (
 	// "database/sql"
 
 	"github.com/jinzhu/gorm"
+
 	// "fmt"
 )
 
 type Product struct {
 	// gorm.Model
-	Id                  int `gorm:"AUTO_INCREMENT"`
-	Merchant_id         int
-	Product_code        string `gorm:"size:50"`
-	Product_name        string `gorm:"size:100"`
+	Id int `gorm:"AUTO_INCREMENT"`
+	Merchant_id int `gorm:"size:15"`
+	Product_code string `gorm:"size:50"`
+	Product_name string `gorm:"size:100"`
 	Product_description string `gorm:"size:255"`
-	Product_base_price  int    `gorm:"size:15"`
-	Product_sell_price  int    `gorm:"size:15"`
-	Created_at          string `gorm:"size:15"`
-	Updated_at          string `gorm:"size:15"`
-	Deleted_at          string `gorm:"size:15"`
+	Product_base_price int `gorm:"size:15"`
+	Product_sell_price int `gorm:"size:15"`
+	Created_at string `gorm:"size:15"`
+	Updated_at string `gorm:"size:15"`
+	Deleted_at string `gorm:"size:15"`
 }
 
 // var err error
@@ -50,23 +51,23 @@ func (p *Product) DeleteProduct(db *gorm.DB) (map[string]interface{}, []error) {
 	// var test map[string]interface{}
 	// var test = make(map[string]interface{})
 	// err := db.Where(statement).Scan(test)
-
+	
 	// err := db.First(&p, p.Id)
-
+	
 	err := db.First(&p)
 	message_success := map[string]interface{}{
-		"Status": "Delete Success",
+		"Status" : "Delete Success",
 	}
-	f := map[string]interface{}{
-		"Name":    p.Product_name,
-		"Price":   p.Product_sell_price,
-		"Message": message_success,
+	f:= map[string]interface{}{
+		"Name" : p.Product_name,
+		"Price" : p.Product_sell_price,
+		"Message" : message_success,
 	}
-	if len(err.GetErrors()) > 0 {
+	if len(err.GetErrors())>0 {
 		return nil, err.GetErrors()
 	}
 	err = db.Delete(&p)
-	if len(err.GetErrors()) > 0 {
+	if len(err.GetErrors())>0 {
 		return nil, err.GetErrors()
 	}
 	return f, nil
@@ -79,7 +80,7 @@ func (p *Product) UpdateProduct(db *gorm.DB) []error {
 	// return err
 	db.First(&p)
 	err := db.Save(&p)
-	return err.GetErrors()
+	return err.GetErrors()	
 }
 
 func GetAllProduct(db *gorm.DB) ([]Product, []error) {
