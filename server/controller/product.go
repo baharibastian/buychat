@@ -1,10 +1,8 @@
 package controller
 
 import (
-	// "fmt"
-	// "errors"
+	"fmt"
 	"buychat/server/model"
-	// "database/sql"
 	"net/http"
 	"github.com/gorilla/mux"
 	"encoding/json"
@@ -45,9 +43,7 @@ func DeleteProduct(w http.ResponseWriter, r *http.Request){
 	}
 
 	p := model.Product{Id:id}
-	// var errors []error
 	res, errors := p.DeleteProduct(database.DB)
-	// fmt.Println(res)
 	if len(errors)>0 {
 		for _, err  := range errors {
 			arr_string_err = append(arr_string_err, err.Error())
@@ -56,18 +52,6 @@ func DeleteProduct(w http.ResponseWriter, r *http.Request){
 		return
 	}
 	respond.RespondWithJSON(w, http.StatusOK, res)
-	// if err{
-	// 	switch err{
-	// 	case sql.ErrNoRows:
-	// 		respond.RespondWithError(w, http.StatusBadRequest, "Product Not Found")
-	// 	default:
-	// 		respond.RespondWithError(w, http.StatusBadRequest, err.Error())
-	// 	}
-	// 	return
-	// }
-	// var make(map[]string interface{})
-	// respond.RespondWithJSON(w, http.StatusOK, "Delete Success")
-	
 }
 
 func UpdateProduct(w http.ResponseWriter, r *http.Request){
@@ -94,6 +78,7 @@ func UpdateProduct(w http.ResponseWriter, r *http.Request){
 func GetAllProduct(w http.ResponseWriter, r *http.Request){
 	arr_string_err = arr_string_err[:0]
 	products, errors := model.GetAllProduct(database.DB)	
+	fmt.Println(errors)
 	if len(errors)>0 {
 		for _,err := range errors{
 			arr_string_err = append(arr_string_err, err.Error())
@@ -123,15 +108,4 @@ func GetProduct(w http.ResponseWriter, r *http.Request){
 		return
 	}
 	respond.RespondWithJSON(w, http.StatusOK, p)
-	// if err!= nil {
-	// 	switch err{
-	// 	case sql.ErrNoRows:
-	// 		respond.RespondWithError(w, http.StatusBadRequest, "Product Not Found")
-	// 	default:
-	// 		respond.RespondWithError(w, http.StatusBadRequest, err.Error())
-	// 	}
-	// 	return
-	// }
-	// respond.RespondWithJSON(w, http.StatusOK, p)
-
 }

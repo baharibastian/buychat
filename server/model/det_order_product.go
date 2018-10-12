@@ -1,5 +1,9 @@
 package model
 
+import (
+	// "fmt"
+	"github.com/jinzhu/gorm"
+)
 type Det_order_product struct {
 	Id                         int    `gorm:"AUTO_INCREMENT"`
 	Order_id                   string `gorm:"size:50"`
@@ -11,4 +15,10 @@ type Det_order_product struct {
 	Det_order_product_status   int    `gorm:"size:11"`
 	Created_at                 string `gorm:"size:15"`
 	Updated_at                 string `gorm:"size:15"`
+}
+
+func (p *Det_order_product) AddDetOrder(db *gorm.DB) bool {
+	db.Create(&p)
+	err := db.NewRecord(p)
+	return err
 }
