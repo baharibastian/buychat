@@ -1,7 +1,7 @@
 package route
 
 import (
-	"rest_api/controller"
+	"buychat/server/controller"
 
 	"github.com/gorilla/mux"
 )

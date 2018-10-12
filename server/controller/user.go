@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"rest_api/database"
-	"rest_api/model"
-	"rest_api/respond"
+	"buychat/server/database"
+	"buychat/server/model"
+	"buychat/server/respond"
 	"strconv"
 
 	"github.com/gorilla/mux"

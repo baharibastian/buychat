@@ -10,7 +10,7 @@ import (
 
 type Product struct {
 	// gorm.Model
-	Product_id int `gorm:"AUTO_INCREMENT"`
+	Id int `gorm:"AUTO_INCREMENT"`
 	Merchant_id int `gorm:"size:15"`
 	Product_code string `gorm:"size:50"`
 	Product_name string `gorm:"size:100"`
@@ -33,9 +33,8 @@ func (p *Product) AddProduct(db *gorm.DB) bool {
 	// id, err := res.LastInsertId()
 	// p.Id = int(id)
 
-	
 	// db.NewRecord(p) // => returns `true` as primary key is blank
-	 db.Create(&p)
+	db.Create(&p)
 	err := db.NewRecord(p) // => return `false` after `user` created
 	return err
 

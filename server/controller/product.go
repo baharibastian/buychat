@@ -3,13 +3,13 @@ package controller
 import (
 	// "fmt"
 	// "errors"
-	"rest_api/model"
+	"buychat/server/model"
 	// "database/sql"
 	"net/http"
 	"github.com/gorilla/mux"
 	"encoding/json"
-	"rest_api/respond"
-	"rest_api/database"
+	"buychat/server/respond"
+	"buychat/server/database"
 	"strconv"
 )
 
@@ -17,7 +17,6 @@ var arr_string_err []string
 
 func AddProduct(w http.ResponseWriter, r *http.Request){
 	arr_string_err = arr_string_err[:0]
-
 	decoder := json.NewDecoder(r.Body)
 	var product model.Product
 	err := decoder.Decode(&product)
@@ -45,7 +44,7 @@ func DeleteProduct(w http.ResponseWriter, r *http.Request){
 		respond.RespondWithError(w, http.StatusBadRequest, arr_string_err)
 	}
 
-	p := model.Product{Product_id:id}
+	p := model.Product{Id:id}
 	// var errors []error
 	res, errors := p.DeleteProduct(database.DB)
 	// fmt.Println(res)
@@ -80,7 +79,7 @@ func UpdateProduct(w http.ResponseWriter, r *http.Request){
 		respond.RespondWithError(w, http.StatusBadRequest, arr_string_err)
 		return
 	}
-	p := model.Product{Product_id:id}
+	p := model.Product{Id:id}
 	errors := p.UpdateProduct(database.DB)
 	if len(errors)>0 {
 		for _,err := range errors{
@@ -114,7 +113,7 @@ func GetProduct(w http.ResponseWriter, r *http.Request){
 		respond.RespondWithError(w, http.StatusBadRequest, arr_string_err)
 		return
 	}
-	p := model.Product{Product_id:id}
+	p := model.Product{Id:id}
 	errors := p.GetProduct(database.DB)
 	if len(errors)>0 {
 		for _,err := range errors{

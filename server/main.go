@@ -3,10 +3,10 @@ package main
 import (
 	"log"
 	"net/http"
-	"rest_api/route"
+	"buychat/server/route"
 )
 
 func main() {
-
+	
 	log.Fatal(http.ListenAndServe(":8000", route.Router))
 }

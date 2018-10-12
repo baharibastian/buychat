@@ -9,7 +9,7 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 
 	"github.com/jinzhu/gorm"
-	"rest_api/model"
+	"buychat/server/model"
 )
 
 var DB *gorm.DB
