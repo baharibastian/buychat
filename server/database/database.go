@@ -16,7 +16,8 @@ var DB *gorm.DB
 
 func init() {
 	var err error
-	DB, err = gorm.Open("mysql", "root:@/golang_new2")
+	DB, err = gorm.Open("mysql", "root:@/golang_new2?parseTime=true")
+	
 	// DB.AutoMigrate(&model.Product{})
 	// DB.DropTable(&model.Product{})
 	DB.AutoMigrate(&model.Order{})

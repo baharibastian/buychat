@@ -2,6 +2,8 @@ package model
 
 import (
 	"github.com/jinzhu/gorm"
+	// "database/sql"
+	"time"
 )
 
 type Order struct {
@@ -13,10 +15,13 @@ type Order struct {
 	Order_total  int    `gorm:"size:11"`
 	Order_return int    `gorm:"size:11"`
 	Order_status int    `gorm:"size:11"`
-	Created_at   string `gorm:"size:15"`
-	Updated_at   string `gorm:"size:15"`
-	// Deleted_at   string `gorm:"size:15"`
-	Deleted_at string `gorm:"DEFAULT:NULL"` // ignore this field
+	// Created_at   time.Time `gorm:"size:15"`
+	Created_at *time.Time `gorm:"type:timestamp"`
+	Updated_at time.Time 
+
+	// Updated_at   time.Time`gorm:"size:15"`
+	Deleted_at   *time.Time
+	// Deleted_at string `gorm:"DEFAULT:NULL"` // ignore this field
 
 }
 

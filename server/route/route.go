@@ -23,4 +23,7 @@ func init() {
 	Router.HandleFunc("/products/{id:[0-9]+}", controller.DeleteProduct).Methods("DELETE")
 	Router.HandleFunc("/products", controller.AddProduct).Methods("POST")
 	Router.HandleFunc("/orders", controller.AddOrder).Methods("POST")
+	Router.HandleFunc("/orders", controller.GetAllOrder).Methods("GET")
+	Router.HandleFunc("/orders/{id:[0-9]+}", controller.UpdateOrder).Methods("PUT")
+	Router.HandleFunc("/orders/{id:[0-9]+}", controller.DeleteOrder).Methods("DELETE")
 }

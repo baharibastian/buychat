@@ -1,5 +1,10 @@
 package model
 
+import (
+	"github.com/jinzhu/gorm"
+	"fmt"
+)
+
 type Merchant struct {
 	Id                   int    `gorm:"AUTO_INCREMENT"`
 	Merchant_code        string `gorm:"size:50"`
@@ -11,6 +16,8 @@ type Merchant struct {
 	Created_at           string `gorm:"size:15"`
 	Updated_at           string `gorm:"size:15"`
 	Deleted_at           string `gorm:"size:15"`
+	Products 			 []Product `gorm:"foreignkey:Merchant_Id`
+
 }
 
 func (p *Merchant) AddMerchant(db *gorm.DB) bool {
