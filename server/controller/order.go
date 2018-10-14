@@ -52,9 +52,8 @@ func DeleteOrder(w http.ResponseWriter, r *http.Request) {
 		respond.RespondWithError(w, http.StatusBadRequest, arr_string_err)
 		return
 	}
-	f := map[string]interface{}{
-		"message": "Success Delete Order",
-	}
+	f := make(map[string]interface{})
+	f["message"] = "Success Delete Order"
 	respond.RespondWithJSON(w, http.StatusOK, f)
 }
 
