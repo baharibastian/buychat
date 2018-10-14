@@ -21,9 +21,11 @@ func AddDetOrder(w http.ResponseWriter, r *http.Request) {
 		respond.RespondWithError(w, http.StatusBadRequest, arr_string_err)
 		return
 	}
-	fail := det_order_product.AddDetOrder(database.DB)
-	if fail {
-		arr_string_err = append(arr_string_err, "Fail Add Order Product")
+	errors := det_order_product.AddDetOrder(database.DB)
+	if len(errors)>0 {
+		for _,err := range errors{
+			arr_string_err = append(arr_string_err, err.Error())
+		}
 		respond.RespondWithError(w, http.StatusBadRequest, arr_string_err)
 		return
 	}

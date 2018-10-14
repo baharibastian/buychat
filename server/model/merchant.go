@@ -3,6 +3,7 @@ package model
 import (
 	"github.com/jinzhu/gorm"
 	"fmt"
+	"time"
 )
 
 type Merchant struct {
@@ -13,9 +14,9 @@ type Merchant struct {
 	Merchant_status      int    `gorm:"size:11"`
 	Merchant_open        string `gorm:"size:11"`
 	Merchant_close       string `gorm:"size:11"`
-	Created_at           string `gorm:"size:15"`
-	Updated_at           string `gorm:"size:15"`
-	Deleted_at           string `gorm:"size:15"`
+	Created_at 			 *time.Time `gorm:"type:timestamp"`
+	Updated_at 			 *time.Time 
+	Deleted_at   		 *time.Time
 	Products 			 []Product `gorm:"foreignkey:Merchant_Id`
 
 }

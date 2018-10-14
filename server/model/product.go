@@ -1,6 +1,7 @@
 package model
 
 import (
+	"time"
 	// "database/sql"
 
 	"github.com/jinzhu/gorm"
@@ -17,9 +18,9 @@ type Product struct {
 	Product_description string `gorm:"size:255"`
 	Product_base_price int `gorm:"size:15"`
 	Product_sell_price int `gorm:"size:15"`
-	Created_at string `gorm:"size:15"`
-	Updated_at string `gorm:"size:15"`
-	Deleted_at string `gorm:"size:15"`
+	Created_at *time.Time `gorm:"type:timestamp"`
+	Updated_at *time.Time 
+	Deleted_at   *time.Time
 }
 
 // var err error
