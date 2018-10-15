@@ -1,6 +1,6 @@
 {
-    "ImportPath" : "go-buychat",
-    "GoVersion" : "go1.1",
-    "GodepVersion": "v74",
-    "Deps": []
+	"ImportPath": "go-buychat",
+	"GoVersion": "go1.11",
+	"GodepVersion": "v80",
+	"Deps": []
 }
