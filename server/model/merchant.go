@@ -3,6 +3,7 @@ package model
 import (
 	"github.com/jinzhu/gorm"
 	"fmt"
+	"time"
 )
 
 type Merchant struct {
@@ -13,43 +14,46 @@ type Merchant struct {
 	Merchant_status      int    `gorm:"size:11"`
 	Merchant_open        string `gorm:"size:11"`
 	Merchant_close       string `gorm:"size:11"`
-	Created_at           string `gorm:"size:15"`
-	Updated_at           string `gorm:"size:15"`
-	Deleted_at           string `gorm:"size:15"`
+	Created_at 			 *time.Time `gorm:"type:timestamp"`
+	Updated_at 			 *time.Time 
+	Deleted_at   		 *time.Time
 	Products 			 []Product `gorm:"foreignkey:Merchant_Id`
-
 }
 
-func (p *Merchant) AddMerchant(db *gorm.DB) bool {
-	db.Create(&p)
-	err := db.NewRecord(p) //if success, will return false otherwise true
-	return err
+func (p *Merchant) AddMerchant(db *gorm.DB) []error {
+	errors := db.Create(&p).GetErrors() 
+	return errors
 }
- func (p *Merchant) DeleteMerchant(db *gorm.DB) (map[string]interface{}, []error) {
-	err := db.First(&p)
+
+func (p *Merchant) DeleteMerchant(db *gorm.DB) (map[string]interface{}, []error) {
+	errors := db.First(&p).GetErrors()
+
+	if len(errors) > 0 {
+		return nil, errors
+	}
+	errors = db.Delete(&p).GetErrors()
+
 	message_success := map[string]interface{}{
 		"Status": "Delete Success",
 	}
+
 	f := map[string]interface{}{
 		"Merchant Code": p.Merchant_code,
 		"Merchant Name": p.Merchant_name,
 		"Message":       message_success,
 	}
-	if len(err.GetErrors()) > 0 {
-		return nil, err.GetErrors()
-	}
-	err = db.Delete(&p)
-	if len(err.GetErrors()) > 0 {
-		return nil, err.GetErrors()
-	}
-	return f, nil
+	return f, errors
 }
- func (p *Merchant) UpdateMerchant(db *gorm.DB) []error {
-	db.First(&p)
-	err := db.Save(&p)
-	return err.GetErrors()
+func (p *Merchant) UpdateMerchant(db *gorm.DB) []error {
+	errors := db.First(&p).GetErrors()
+	if len(errors)>0{
+		return errors
+	}
+	errors = db.Save(&p).GetErrors()
+	return errors
 }
- func GetAllMerchants(db *gorm.DB) ([]Merchant, []error) {
+
+func GetAllMerchants(db *gorm.DB) ([]Merchant, []error) {
 	var merchants []Merchant
 	errors := db.Find(&merchants).GetErrors()
 	if len(errors) > 0 {
@@ -66,7 +70,8 @@ func (p *Merchant) AddMerchant(db *gorm.DB) bool {
 	}
 	return new_merchants, errors
 }
- func (p *Merchant) GetMerchant(db *gorm.DB) []error {
-	err := db.First(&p)
-	return err.GetErrors()
- }
+
+func (p *Merchant) GetMerchant(db *gorm.DB) []error {
+	errors := db.First(&p).GetErrors()
+	return errors
+}

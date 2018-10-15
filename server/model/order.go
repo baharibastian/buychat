@@ -15,14 +15,9 @@ type Order struct {
 	Order_total  int    `gorm:"size:11"`
 	Order_return int    `gorm:"size:11"`
 	Order_status int    `gorm:"size:11"`
-	// Created_at   time.Time `gorm:"size:15"`
 	Created_at *time.Time `gorm:"type:timestamp"`
-	Updated_at time.Time 
-
-	// Updated_at   time.Time`gorm:"size:15"`
+	Updated_at *time.Time 
 	Deleted_at   *time.Time
-	// Deleted_at string `gorm:"DEFAULT:NULL"` // ignore this field
-
 }
 
 func (o *Order) AddOrder(db *gorm.DB) []error {
@@ -45,7 +40,11 @@ func (o *Order) UpdateOrder(db *gorm.DB) []error {
 }
 
 func (o *Order) DeleteOrder(db *gorm.DB) []error {
-	errors := db.Delete(&o).GetErrors()
+	errors := db.First(&o).GetErrors()
+	if len(errors) > 0 {
+		return errors
+	}
+	errors = db.Delete(&o).GetErrors()
 	return errors
 }
 
