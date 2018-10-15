@@ -1,1 +1,1 @@
-web: helloworld
+web: go-getting-started
