@@ -1,0 +1,6 @@
+package: buychat/server
+import:
+- package: github.com/gorilla/mux
+- package: github.com/jinzhu/gorm
+  subpackages:
+  - dialects/mysql
