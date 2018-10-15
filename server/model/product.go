@@ -10,7 +10,6 @@ import (
 )
 
 type Product struct {
-	// gorm.Model
 	Id int `gorm:"AUTO_INCREMENT"`
 	Merchant_id int `gorm:"size:15"`
 	Product_code string `gorm:"size:50"`

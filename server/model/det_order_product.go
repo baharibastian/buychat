@@ -9,7 +9,7 @@ import (
 
 type Det_order_product struct {
 	Id                         int        `gorm:"AUTO_INCREMENT"`
-	Order_id                   string     `gorm:"size:50"`
+	Order_id                   int     	  `gorm:"size:11"`
 	Product_id                 int        `gorm:"size:11"`
 	Det_order_product_qty      int        `gorm:"size:11"`
 	Det_order_product_total    int        `gorm:"size:50"`
@@ -22,8 +22,7 @@ type Det_order_product struct {
 }
 
 func (dop *Det_order_product) AddDetOrder(db *gorm.DB) []error {
-	db.Create(&dop)
-	errors := db.Create(dop).GetErrors()
+	errors := db.Create(&dop).GetErrors()
 	return errors
 }
 
