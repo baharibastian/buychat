@@ -1,10 +1,162 @@
 {
 	"comment": "",
-	"ignore": "test",
-	"package": [],
-	"rootPath": "github.com/buychat/server",
 	"heroku": {
-        "install" : [ "./..." ],
-        "goVersion": "go1.6"
-    }
+		"goVersion": "go1.6",
+		"install": [
+			"./..."
+		]
+	},
+	"ignoore": "test",
+	"ignore": "",
+	"package": [
+		{
+			"path": "appengine/cloudsql",
+			"revision": ""
+		},
+		{
+			"checksumSHA1": "H3FDPhlDUezdffSiSJSGwkM5/1Y=",
+			"path": "cloud.google.com/go/civil",
+			"revision": "9da47248ef3fd5145fb3841042bfbcea9075e658",
+			"revisionTime": "2018-10-15T20:57:10Z"
+		},
+		{
+			"checksumSHA1": "7MnDzwUsGjN4Q1M2tDBVz228t4U=",
+			"path": "github.com/denisenkom/go-mssqldb",
+			"revision": "4e0d7dc8888fbb59764060e99b7b68e77a6f9698",
+			"revisionTime": "2018-10-14T14:49:52Z"
+		},
+		{
+			"checksumSHA1": "wu8t19t2rmyrrfDfdu9v7f/+iag=",
+			"path": "github.com/denisenkom/go-mssqldb/internal/cp",
+			"revision": "4e0d7dc8888fbb59764060e99b7b68e77a6f9698",
+			"revisionTime": "2018-10-14T14:49:52Z"
+		},
+		{
+			"checksumSHA1": "fyQ6D2LUvzhSnGxDSXPARWONPtg=",
+			"path": "github.com/erikstmartin/go-testdb",
+			"revision": "8d10e4a1bae52cd8b81ffdec3445890d6dccab3d",
+			"revisionTime": "2016-02-19T21:45:06Z"
+		},
+		{
+			"checksumSHA1": "b7803cysvrUo+tAoObqmtRa5l5M=",
+			"path": "github.com/go-sql-driver/mysql",
+			"revision": "361f66ef3b53de1f16b7f2af9ef38a6c159ceb3e",
+			"revisionTime": "2018-10-01T07:22:39Z"
+		},
+		{
+			"checksumSHA1": "SFII+flxJufKdRzxd9oO/2Fm4Js=",
+			"path": "github.com/google/go-cmp/cmp",
+			"revision": "875f8df8b7965f1eac1098d36d677f807ac0b49e",
+			"revisionTime": "2018-09-11T19:48:14Z"
+		},
+		{
+			"checksumSHA1": "twPvebWx/NJmsWEQHHC4xXNTKUQ=",
+			"path": "github.com/google/go-cmp/cmp/cmpopts",
+			"revision": "875f8df8b7965f1eac1098d36d677f807ac0b49e",
+			"revisionTime": "2018-09-11T19:48:14Z"
+		},
+		{
+			"checksumSHA1": "1DsDw5N3OeqXv09kZ48jEwTIy8Y=",
+			"path": "github.com/google/go-cmp/cmp/internal/diff",
+			"revision": "875f8df8b7965f1eac1098d36d677f807ac0b49e",
+			"revisionTime": "2018-09-11T19:48:14Z"
+		},
+		{
+			"checksumSHA1": "kYtvRhMjM0X4bvEjR3pqEHLw1qo=",
+			"path": "github.com/google/go-cmp/cmp/internal/function",
+			"revision": "875f8df8b7965f1eac1098d36d677f807ac0b49e",
+			"revisionTime": "2018-09-11T19:48:14Z"
+		},
+		{
+			"checksumSHA1": "Itk+/f1ovltPyypbROriCBPBeJ0=",
+			"path": "github.com/google/go-cmp/cmp/internal/testprotos",
+			"revision": "875f8df8b7965f1eac1098d36d677f807ac0b49e",
+			"revisionTime": "2018-09-11T19:48:14Z"
+		},
+		{
+			"checksumSHA1": "tvL+eRWuf50vUaVaY8B/s6DMj70=",
+			"path": "github.com/google/go-cmp/cmp/internal/teststructs",
+			"revision": "875f8df8b7965f1eac1098d36d677f807ac0b49e",
+			"revisionTime": "2018-09-11T19:48:14Z"
+		},
+		{
+			"checksumSHA1": "GaBWM3o2QC5TVLNUn3yo7PBYM0g=",
+			"path": "github.com/google/go-cmp/cmp/internal/value",
+			"revision": "875f8df8b7965f1eac1098d36d677f807ac0b49e",
+			"revisionTime": "2018-09-11T19:48:14Z"
+		},
+		{
+			"checksumSHA1": "Gv4fOd06SWx0JniRBOqoNDC/CjI=",
+			"path": "github.com/gorilla/mux",
+			"revision": "deb579d6e030503f430978ee229008b9bc912d40",
+			"revisionTime": "2018-10-12T15:31:51Z"
+		},
+		{
+			"checksumSHA1": "AZXlD31gGXsYif22lxvTqi49lzY=",
+			"path": "github.com/jinzhu/gorm",
+			"revision": "742154be9a26e849f02d296073c077e0a7c23828",
+			"revisionTime": "2018-10-07T00:49:37Z"
+		},
+		{
+			"checksumSHA1": "u+4Y3GNnV4CknfqKkFfQFv21Sl0=",
+			"path": "github.com/jinzhu/gorm/dialects/mssql",
+			"revision": "742154be9a26e849f02d296073c077e0a7c23828",
+			"revisionTime": "2018-10-07T00:49:37Z"
+		},
+		{
+			"checksumSHA1": "0Pry12nZ6UQBd1iXEtszySSfFpI=",
+			"path": "github.com/jinzhu/gorm/dialects/postgres",
+			"revision": "742154be9a26e849f02d296073c077e0a7c23828",
+			"revisionTime": "2018-10-07T00:49:37Z"
+		},
+		{
+			"checksumSHA1": "4VZ1gLZHMumRjV3fclS1aX8S1aQ=",
+			"path": "github.com/jinzhu/gorm/dialects/sqlite",
+			"revision": "742154be9a26e849f02d296073c077e0a7c23828",
+			"revisionTime": "2018-10-07T00:49:37Z"
+		},
+		{
+			"checksumSHA1": "NTRBrQH3n8ZieRgGQh8dDcelROw=",
+			"path": "github.com/jinzhu/now",
+			"revision": "ed742868f2aebdb1c0c437bf4f7257f88834b66f",
+			"revisionTime": "2018-05-11T01:59:16Z"
+		},
+		{
+			"checksumSHA1": "jVsv+BmUDEp7wIqdR2j6FJxipOU=",
+			"path": "github.com/lib/pq",
+			"revision": "0ac245bc3be505fde6900e1ca0f957c0845cbfa2",
+			"revisionTime": "2018-10-16T05:27:06Z"
+		},
+		{
+			"checksumSHA1": "BC9Ng4sUc0Nq7ICgwsAzNwUT9A8=",
+			"path": "github.com/lib/pq/hstore",
+			"revision": "0ac245bc3be505fde6900e1ca0f957c0845cbfa2",
+			"revisionTime": "2018-10-16T05:27:06Z"
+		},
+		{
+			"checksumSHA1": "AU3fA8Sm33Vj9PBoRPSeYfxLRuE=",
+			"path": "github.com/lib/pq/oid",
+			"revision": "0ac245bc3be505fde6900e1ca0f957c0845cbfa2",
+			"revisionTime": "2018-10-16T05:27:06Z"
+		},
+		{
+			"checksumSHA1": "B/ZRoYW2q+K3HArK+bzVhwSfL7w=",
+			"path": "github.com/mattn/go-sqlite3",
+			"revision": "c67b489f7e8e10b993944d4ecef084df2db3ec8e",
+			"revisionTime": "2018-10-15T13:44:34Z"
+		},
+		{
+			"checksumSHA1": "c7U2W5dC+nzbOXafb0Ysl8PJ6og=",
+			"path": "golang.org/x/crypto/md4",
+			"revision": "0c41d7ab0a0ee717d4590a44bcb987dfd9e183eb",
+			"revisionTime": "2018-10-15T00:23:17Z"
+		},
+		{
+			"checksumSHA1": "LiyXfqOzaeQ8vgYZH3t2hUEdVTw=",
+			"path": "google.golang.org/appengine/cloudsql",
+			"revision": "ae0ab99deb4dc413a2b4bd6c8bdd0eb67f1e4d06",
+			"revisionTime": "2018-09-18T20:26:59Z"
+		}
+	],
+	"rootPath": "github.com/buychat/server"
 }
