@@ -99,7 +99,7 @@
 		},
 		{
 			"checksumSHA1": "u+4Y3GNnV4CknfqKkFfQFv21Sl0=",
-			"path": "github.com/jinzhu/gorm/dialects/mssql",
+			"path": "github.com/jinzhu/gorm/dialects/mysql",
 			"revision": "742154be9a26e849f02d296073c077e0a7c23828",
 			"revisionTime": "2018-10-07T00:49:37Z"
 		},
