@@ -1,0 +1,31 @@
+{
+	"ImportPath": "github.com/buychat/server",
+	"GoVersion": "go1.11",
+	"GodepVersion": "v80",
+	"Deps": [
+		{
+			"ImportPath": "github.com/go-sql-driver/mysql",
+			"Comment": "v1.4.0-6-g361f66e",
+			"Rev": "361f66ef3b53de1f16b7f2af9ef38a6c159ceb3e"
+		},
+		{
+			"ImportPath": "github.com/gorilla/mux",
+			"Comment": "v1.6.2-10-gdeb579d",
+			"Rev": "deb579d6e030503f430978ee229008b9bc912d40"
+		},
+		{
+			"ImportPath": "github.com/jinzhu/gorm",
+			"Comment": "v1.9.1-32-g742154b",
+			"Rev": "742154be9a26e849f02d296073c077e0a7c23828"
+		},
+		{
+			"ImportPath": "github.com/jinzhu/gorm/dialects/mysql",
+			"Comment": "v1.9.1-32-g742154b",
+			"Rev": "742154be9a26e849f02d296073c077e0a7c23828"
+		},
+		{
+			"ImportPath": "github.com/jinzhu/inflection",
+			"Rev": "04140366298a54a039076d798123ffa108fff46c"
+		}
+	]
+}
