@@ -1,11 +1,11 @@
 package controller
  import (
-	"buychat/server/model"
+	"github.com/buychat/server/model"
 	"net/http"
 	"github.com/gorilla/mux"
 	"encoding/json"
-	"buychat/server/respond"
-	"buychat/server/database"
+	"github.com/buychat/server/respond"
+	"github.com/buychat/server/database"
 	"strconv"
 )
 

@@ -3,9 +3,9 @@ package controller
 import (
 	"fmt"
 	// "errors"
-	"buychat/server/database"
-	"buychat/server/model" // "database/sql"
-	"buychat/server/respond"
+	"github.com/buychat/server/database"
+	"github.com/buychat/server/model" // "database/sql"
+	"github.com/buychat/server/respond"
 	"encoding/json"
 	"net/http"
 	"strconv"

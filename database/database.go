@@ -8,7 +8,7 @@ import (
 	// _ "github.com/go-sql-driver/mysql"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 
-	"buychat/server/model"
+	"github.com/buychat/server/model"
 
 	"github.com/jinzhu/gorm"
 )
