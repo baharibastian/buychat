@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
-	"buychat/server/route"
+	"github.com/buychat/server/route"
 	"os"
 )
 

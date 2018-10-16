@@ -1,1 +1,1 @@
-web: go-buychat
+web: server
