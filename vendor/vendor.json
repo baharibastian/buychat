@@ -2,5 +2,9 @@
 	"comment": "",
 	"ignore": "test",
 	"package": [],
-	"rootPath": "github.com/buychat/server"
+	"rootPath": "github.com/buychat/server",
+	"heroku": {
+        "install" : [ "./..." ],
+        "goVersion": "go1.6"
+    }
 }
