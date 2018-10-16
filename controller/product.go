@@ -101,7 +101,11 @@ func GetAllProduct(w http.ResponseWriter, r *http.Request){
 		respond.RespondWithError(w, http.StatusBadRequest, arr_string_err)
 		return
 	}
-	respond.RespondWithJSON(w, http.StatusOK, products)
+	response := map[string]interface{} {
+		"count": len(products),
+		"data": products,
+	}
+	respond.RespondWithJSON(w, http.StatusOK, response)
 }
 
 func GetProduct(w http.ResponseWriter, r *http.Request){
