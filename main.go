@@ -13,5 +13,5 @@ func main() {
 	if port == "" {
 		port = ""
 	}
-	log.Fatal(http.ListenAndServe(":8000", route.Router))
+	log.Fatal(http.ListenAndServe(":"+port, route.Router))
 }
