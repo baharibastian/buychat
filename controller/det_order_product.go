@@ -3,7 +3,7 @@ package controller
 import (
 	"github.com/buychat/server/model"
 	"net/http"
-	"vendor/github.com/gorilla/mux"
+	"github.com/gorilla/mux"
 	"encoding/json"
 	"github.com/buychat/server/respond"
 	"github.com/buychat/server/database"
