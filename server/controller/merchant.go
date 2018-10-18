@@ -1,11 +1,11 @@
 package controller
  import (
-	"buychat/server/model"
+	"github.com/buychat/server/model"
 	"net/http"
 	"github.com/gorilla/mux"
 	"encoding/json"
-	"buychat/server/respond"
-	"buychat/server/database"
+	"github.com/buychat/server/respond"
+	"github.com/buychat/server/database"
 	"strconv"
 )
 
@@ -40,7 +40,12 @@ package controller
 		respond.RespondWithError(w, http.StatusBadRequest, arr_string_err)
 		return
 	}
-	respond.RespondWithJSON(w, http.StatusOK, merchants)
+	response := map[string]interface{} {
+		"count": len(merchants),
+		"data": merchants,
+	}
+	
+	respond.RespondWithJSON(w, http.StatusOK, response)
 }
 
  func GetMerchant(w http.ResponseWriter, r *http.Request){

@@ -18,6 +18,8 @@ import errno
 import os
 import sys
 import tempfile
+import requests
+import json
 from argparse import ArgumentParser
 
 from flask import Flask, request, abort
@@ -41,7 +43,7 @@ from linebot.models import (
     UnfollowEvent, FollowEvent, JoinEvent, LeaveEvent, BeaconEvent,
     FlexSendMessage, BubbleContainer, ImageComponent, BoxComponent,
     TextComponent, SpacerComponent, IconComponent, ButtonComponent,
-    SeparatorComponent, QuickReply, QuickReplyButton
+    SeparatorComponent, QuickReply, QuickReplyButton, CarouselContainer
 )
 
 app = Flask(__name__)
@@ -148,14 +150,26 @@ def handle_text_message(event):
         line_bot_api.reply_message(event.reply_token, template_message)
     elif text == 'carousel':
         carousel_template = CarouselTemplate(columns=[
-            CarouselColumn(text='hoge1', title='fuga1', actions=[
-                URIAction(label='Go to line.me', uri='https://line.me'),
-                PostbackAction(label='ping', data='ping')
-            ]),
-            CarouselColumn(text='hoge2', title='fuga2', actions=[
-                PostbackAction(label='ping with text', data='ping', text='ping'),
-                MessageAction(label='Translate Rice', text='米')
-            ]),
+            CarouselColumn(
+                thumbnail_image_url = 'https://icons.iconarchive.com/icons/paomedia/small-n-flat/512/shop-icon.png',
+                image_background_color = '#ffffff',
+                text = 'hoge1',
+                title = 'fuga1',
+                actions = [
+                    URIAction(label='Go to line.me', uri='https://line.me'),
+                    PostbackAction(label='ping', data='ping')
+                ]
+            ),
+            CarouselColumn(
+                thumbnail_image_url = 'https://icons.iconarchive.com/icons/paomedia/small-n-flat/512/shop-icon.png',
+                image_background_color='#FFFFFF',
+                text = 'hoge2',
+                title='fuga2',
+                actions = [
+                    PostbackAction(label='ping with text', data='ping', text='ping'),
+                    MessageAction(label='Translate Rice', text='米')
+                ]
+            ),
         ])
         template_message = TemplateSendMessage(
             alt_text='Carousel alt text', template=carousel_template)
@@ -180,7 +194,7 @@ def handle_text_message(event):
         bubble = BubbleContainer(
             direction='ltr',
             hero=ImageComponent(
-                url='https://example.com/cafe.jpg',
+                url='https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_2_restaurant.png',
                 size='full',
                 aspect_ratio='20:13',
                 aspect_mode='cover',
@@ -188,6 +202,7 @@ def handle_text_message(event):
             ),
             body=BoxComponent(
                 layout='vertical',
+                spacing='md',
                 contents=[
                     # title
                     TextComponent(text='Brown Cafe', weight='bold', size='xl'),
@@ -196,13 +211,13 @@ def handle_text_message(event):
                         layout='baseline',
                         margin='md',
                         contents=[
-                            IconComponent(size='sm', url='https://example.com/gold_star.png'),
-                            IconComponent(size='sm', url='https://example.com/grey_star.png'),
-                            IconComponent(size='sm', url='https://example.com/gold_star.png'),
-                            IconComponent(size='sm', url='https://example.com/gold_star.png'),
-                            IconComponent(size='sm', url='https://example.com/grey_star.png'),
+                            IconComponent(size='sm', url='https://cdn4.iconfinder.com/data/icons/small-n-flat/24/star-512.png'),
+                            IconComponent(size='sm', url='https://cdn4.iconfinder.com/data/icons/small-n-flat/24/star-512.png'),
+                            IconComponent(size='sm', url='https://cdn4.iconfinder.com/data/icons/small-n-flat/24/star-512.png'),
+                            IconComponent(size='sm', url='https://cdn4.iconfinder.com/data/icons/small-n-flat/24/star-512.png'),
+                            IconComponent(size='sm', url='https://cdn4.iconfinder.com/data/icons/small-n-flat/24/star-512.png'),
                             TextComponent(text='4.0', size='sm', color='#999999', margin='md',
-                                          flex=0)
+                                        flex=0)
                         ]
                     ),
                     # info
@@ -258,57 +273,65 @@ def handle_text_message(event):
                 spacing='sm',
                 contents=[
                     # callAction, separator, websiteAction
-                    SpacerComponent(size='sm'),
+                    SpacerComponent(size='xxl'),
                     # callAction
                     ButtonComponent(
-                        style='link',
+                        style='primary',
                         height='sm',
-                        action=URIAction(label='CALL', uri='tel:000000'),
+                        # action=URIAction(label='CALL', uri='tel:000000'),
+                        color='#905c44',
+                        action = URIAction(
+                            label='Add to Cart',
+                            uri='https://linecorp.com'
+                        )
                     ),
                     # separator
-                    SeparatorComponent(),
-                    # websiteAction
-                    ButtonComponent(
-                        style='link',
-                        height='sm',
-                        action=URIAction(label='WEBSITE', uri="https://example.com")
-                    )
+                    # SeparatorComponent(),
+                    # # websiteAction
+                    # ButtonComponent(
+                    #     style='link',
+                    #     height='sm',
+                    #     action=URIAction(label='WEBSITE', uri="https://example.com")
+                    # )
                 ]
             ),
         )
-        message = FlexSendMessage(alt_text="hello", contents=bubble)
+        flex = []
+        flex.append(bubble)
+        flex.append(bubble)
+        a = CarouselContainer(
+            type = 'carousel',
+            contents = flex
+        )
+        
+        message = FlexSendMessage(alt_text="hello", contents=a)
         line_bot_api.reply_message(
             event.reply_token,
             message
         )
-    elif text == 'quick_reply':
+
+    elif text == '/list_barang':
+        req = requests.get('https://server-buychat.herokuapp.com/products')
+        response = json.loads(req.text)
+        items = []
+        for product in response['data']:
+            postdata = {"action":"search_product_merchant","product_id":product['Id']}
+            items.append(
+                QuickReplyButton(
+                    action=PostbackAction(label=product['Product_name'], data=json.dumps(postdata))
+                )
+            )
+        
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(
-                text='Quick reply',
+                text='Ada %s Barang Yang Tersedia' % (response['count']),
                 quick_reply=QuickReply(
-                    items=[
-                        QuickReplyButton(
-                            action=PostbackAction(label="label1", data="data1")
-                        ),
-                        QuickReplyButton(
-                            action=MessageAction(label="label2", text="text2")
-                        ),
-                        QuickReplyButton(
-                            action=DatetimePickerAction(label="label3",
-                                                        data="data3",
-                                                        mode="date")
-                        ),
-                        QuickReplyButton(
-                            action=CameraAction(label="label4")
-                        ),
-                        QuickReplyButton(
-                            action=CameraRollAction(label="label5")
-                        ),
-                        QuickReplyButton(
-                            action=LocationAction(label="label6")
-                        ),
-                    ])))
+                    items=items
+                )
+            )
+        )
+
     else:
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=event.message.text))
@@ -408,6 +431,7 @@ def handle_leave():
 
 @handler.add(PostbackEvent)
 def handle_postback(event):
+    print(event.postback.data)
     if event.postback.data == 'ping':
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text='pong'))
@@ -417,6 +441,16 @@ def handle_postback(event):
     elif event.postback.data == 'date_postback':
         line_bot_api.reply_message(
             event.reply_token, TextSendMessage(text=event.postback.params['date']))
+    else:
+        postback_data = json.loads(event.postback.data)
+        if postback_data['product_id'] is None:
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text='Produk Tidak Ditemukan, Terjadi Kesalahan Pada Server')
+            )
+            return
+        
+        
 
 
 @handler.add(BeaconEvent)
@@ -431,3 +465,32 @@ def handle_beacon(event):
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
+
+
+# line_bot_api.reply_message(
+#             event.reply_token,
+#             TextSendMessage(
+#                 text='Quick reply',
+#                 quick_reply=QuickReply(
+#                     items=[
+#                         QuickReplyButton(
+#                             action=PostbackAction(label="label1", data="data1")
+#                         ),
+#                         QuickReplyButton(
+#                             action=MessageAction(label="label2", text="text2")
+#                         ),
+#                         QuickReplyButton(
+#                             action=DatetimePickerAction(label="label3",
+#                                                         data="data3",
+#                                                         mode="date")
+#                         ),
+#                         QuickReplyButton(
+#                             action=CameraAction(label="label4")
+#                         ),
+#                         QuickReplyButton(
+#                             action=CameraRollAction(label="label5")
+#                         ),
+#                         QuickReplyButton(
+#                             action=LocationAction(label="label6")
+#                         ),
+#                     ])))

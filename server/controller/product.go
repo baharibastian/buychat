@@ -3,13 +3,13 @@ package controller
 import (
 	// "fmt"
 	// "errors"
-	"buychat/server/model"
+	"github.com/buychat/server/model"
 	// "database/sql"
 	"net/http"
 	"github.com/gorilla/mux"
 	"encoding/json"
-	"buychat/server/respond"
-	"buychat/server/database"
+	"github.com/buychat/server/respond"
+	"github.com/buychat/server/database"
 	"strconv"
 )
 
@@ -101,7 +101,11 @@ func GetAllProduct(w http.ResponseWriter, r *http.Request){
 		respond.RespondWithError(w, http.StatusBadRequest, arr_string_err)
 		return
 	}
-	respond.RespondWithJSON(w, http.StatusOK, products)
+	response := map[string]interface{} {
+		"count": len(products),
+		"data": products,
+	}
+	respond.RespondWithJSON(w, http.StatusOK, response)
 }
 
 func GetProduct(w http.ResponseWriter, r *http.Request){

@@ -8,16 +8,17 @@ import (
 	// _ "github.com/go-sql-driver/mysql"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 
+	"github.com/buychat/server/model"
+
 	"github.com/jinzhu/gorm"
-	"buychat/server/model"
 )
 
 var DB *gorm.DB
 
 func init() {
 	var err error
-	DB, err = gorm.Open("mysql", "root:@/golang_new2?parseTime=true")
-	
+	DB, err = gorm.Open("mysql", "sql12261256:vthTmGeATF@tcp(sql12.freemysqlhosting.net)/sql12261256?parseTime=true")
+
 	// DB.AutoMigrate(&model.Product{})
 	// DB.DropTable(&model.Product{})
 	DB.AutoMigrate(&model.Order{})

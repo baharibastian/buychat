@@ -1,27 +1,28 @@
 package model
 
 import (
-	"github.com/jinzhu/gorm"
-	"fmt"
+	//"fmt"
 	"time"
+
+	"github.com/jinzhu/gorm"
 )
 
 type Merchant struct {
-	Id                   int    `gorm:"AUTO_INCREMENT"`
-	Merchant_code        string `gorm:"size:50"`
-	Merchant_name        string `gorm:"size:100"`
-	Merchant_description string `gorm:"size:255"`
-	Merchant_status      int    `gorm:"size:11"`
-	Merchant_open        string `gorm:"size:11"`
-	Merchant_close       string `gorm:"size:11"`
-	Created_at 			 *time.Time `gorm:"type:timestamp"`
-	Updated_at 			 *time.Time 
-	Deleted_at   		 *time.Time
-	Products 			 []Product `gorm:"foreignkey:Merchant_Id`
+	Id                   int        `gorm:"AUTO_INCREMENT"`
+	Merchant_code        string     `gorm:"size:50"`
+	Merchant_name        string     `gorm:"size:100"`
+	Merchant_description string     `gorm:"size:255"`
+	Merchant_status      int        `gorm:"size:11"`
+	Merchant_open        string     `gorm:"size:11"`
+	Merchant_close       string     `gorm:"size:11"`
+	Created_at           *time.Time `gorm:"type:timestamp"`
+	Updated_at           *time.Time
+	Deleted_at           *time.Time
+	Products             []Product `gorm:"foreignkey:Merchant_Id`
 }
 
 func (p *Merchant) AddMerchant(db *gorm.DB) []error {
-	errors := db.Create(&p).GetErrors() 
+	errors := db.Create(&p).GetErrors()
 	return errors
 }
 
@@ -46,7 +47,7 @@ func (p *Merchant) DeleteMerchant(db *gorm.DB) (map[string]interface{}, []error)
 }
 func (p *Merchant) UpdateMerchant(db *gorm.DB) []error {
 	errors := db.First(&p).GetErrors()
-	if len(errors)>0{
+	if len(errors) > 0 {
 		return errors
 	}
 	errors = db.Save(&p).GetErrors()
@@ -61,9 +62,7 @@ func GetAllMerchants(db *gorm.DB) ([]Merchant, []error) {
 	}
 	var new_merchants []Merchant
 	for _, merch := range merchants {
-		fmt.Println(merch)
 		var merchant Merchant
-		fmt.Println(merch.Id)
 		db.Find(&merch).Related(&merch.Products) //SELECT * FROM merchants JOIN products ON merchants.id = products.merchant_id WHERE merchant_id = merch.id
 		merchant = merch
 		new_merchants = append(new_merchants, merchant)
