@@ -43,5 +43,11 @@ func (p *Product_category) DeleteCategory(db *gorm.DB) (map[string]interface{}, 
 func (p *Product_category) UpdateProduct(db *gorm.DB) []error {
 	db.First(&p)
 	err := db.Save(&p)
-	return err.GetErrors
+	return err.GetErrors()
+}
+
+func GetAllProductCategory(db *gorm.DB) ([]Product_category, []error) {
+	var product_categories []Product_category
+	res := db.Find(&product_categories)
+	return product_categories, res.GetErrors()
 }

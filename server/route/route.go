@@ -30,5 +30,7 @@ func init() {
 	Router.HandleFunc("/merchant", controller.AddMerchant).Methods("POST")
 	Router.HandleFunc("/merchant/{id:[0-9]+}", controller.DeleteMerchant).Methods("DELETE")
 	Router.HandleFunc("/merchant", controller.GetAllMerchants).Methods("GET")
-
+	Router.HandleFunc("/product_category", controller.AddProductCategory).Methods("POST")
+	Router.HandleFunc("/product_category/{id:[0-9]+}", controller.DeleteProductCategory).Methods("DELETE")
+	Router.HandleFunc("/product_category", controller.GetAllProductCategory).Methods("GET")
 }

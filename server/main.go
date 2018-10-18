@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"github.com/buychat/server/route"
 	"os"
+	"fmt"
 )
 
 func main() {
@@ -13,5 +14,6 @@ func main() {
 	if port == "" {
 		port = ""
 	}
-	log.Fatal(http.ListenAndServe(":"+port, route.Router))
+	log.Fatal(http.ListenAndServe(":8000", route.Router))
+	fmt.Println("REST server run on localhost:" + port)
 }
