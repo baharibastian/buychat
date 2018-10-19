@@ -29,6 +29,7 @@ func init() {
 	DB.Model(&model.Det_order_product{}).AddForeignKey("order_id", "orders(id)", "RESTRICT", "RESTRICT")
 	DB.Model(&model.Det_order_product{}).AddForeignKey("product_id", "products(id)", "RESTRICT", "RESTRICT")
 	DB.AutoMigrate(&model.Product_category{})
+	DB.Model(&model.Product{}).AddForeignKey("product_category_id", "product_categories(id)", "RESTRICT", "RESTRICT")
 	// DB.AutoMigrate(&model.User{})
 	// DB, err = sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/golang_new")
 	if err != nil {

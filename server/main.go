@@ -12,8 +12,8 @@ func main() {
 	port := os.Getenv("PORT")
 
 	if port == "" {
-		port = ""
+		port = "8000"
 	}
-	log.Fatal(http.ListenAndServe(":8000", route.Router))
+	log.Fatal(http.ListenAndServe(":"+port, route.Router))
 	fmt.Println("REST server run on localhost:" + port)
 }

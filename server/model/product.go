@@ -14,6 +14,7 @@ type Product struct {
 	Merchant_id int `gorm:"size:15"`
 	Product_code string `gorm:"size:50"`
 	Product_name string `gorm:"size:100"`
+	Product_category_id int `gorm:"size:11"`
 	Product_description string `gorm:"size:255"`
 	Product_base_price int `gorm:"size:15"`
 	Product_sell_price int `gorm:"size:15"`
