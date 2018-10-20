@@ -1,7 +1,7 @@
 package model
 
 import (
-	//"fmt"
+	"fmt"
 	"time"
 
 	"github.com/jinzhu/gorm"
@@ -65,8 +65,11 @@ func GetAllMerchants(db *gorm.DB) ([]Merchant, []error) {
 		var merchant Merchant
 		db.Find(&merch).Related(&merch.Products) //SELECT * FROM merchants JOIN products ON merchants.id = products.merchant_id WHERE merchant_id = merch.id
 		merchant = merch
+		fmt.Println("nohh")
+		fmt.Println(&merch)
 		new_merchants = append(new_merchants, merchant)
 	}
+
 	return new_merchants, errors
 }
 

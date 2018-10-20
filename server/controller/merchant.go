@@ -51,7 +51,7 @@ package controller
  func GetMerchant(w http.ResponseWriter, r *http.Request){
 	arr_string_err = arr_string_err[:0]
 	vars := mux.Vars(r)
-	id, err := strconv.Atoi(vars["merchant_id"])
+	id, err := strconv.Atoi(vars["id"])
 	if err!= nil {
 		arr_string_err = append(arr_string_err,err.Error())
 		respond.RespondWithError(w, http.StatusBadRequest, arr_string_err)

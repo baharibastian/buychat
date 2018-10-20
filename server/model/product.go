@@ -21,6 +21,7 @@ type Product struct {
 	Created_at *time.Time `gorm:"type:timestamp"`
 	Updated_at *time.Time 
 	Deleted_at   *time.Time
+	Merchant Merchant `gorm:"foreignkey:Merchant_id`
 }
 
 // var err error
@@ -84,22 +85,27 @@ func (p *Product) UpdateProduct(db *gorm.DB) []error {
 	return err.GetErrors()	
 }
 
-func GetAllProduct(db *gorm.DB) ([]Product, []error) {
-	// statement := fmt.Sprintf("SELECT * FROM PRODUCTS")
-	// var products []Product
-	// rows, err := db.Query(statement)
-	// for rows.Next() {
-	// 	p := Product{}
-	// 	err := rows.Scan(&p.Id, &p.Name, &p.Price, &p.User_Id)
-	// 	if err != nil {
-	// 		return nil, err
-	// 	}
-	// 	products = append(products, p)
-	// }
-	// return products, err
+func GetAllProduct(db *gorm.DB, id int) ([]Product, []error) {
 	var products []Product
-	res := db.Find(&products)
-	return products, res.GetErrors()
+	var new_products []Product
+	if id > 0 {
+		errors := db.Where("product_category_id = ?", id).Find(&products).GetErrors()
+		if len(errors) > 0 {
+			return nil, errors
+		}
+		for _, product := range products {
+			var prod Product
+			db.Find(&product).Related(&product.Merchant)
+			prod = product
+			new_products = append(new_products, prod)
+		}
+		res := db
+		return new_products, res.GetErrors()
+	} else {
+		res := db.Find(&products)
+		return products, res.GetErrors()
+	}
+	
 }
 
 func (p *Product) GetProduct(db *gorm.DB) []error {
