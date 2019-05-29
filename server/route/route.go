@@ -1,7 +1,7 @@
 package route
 
 import (
-	"buychat/server/controller"
+	"github.com/buychat/server/controller"
 
 	"github.com/gorilla/mux"
 )
@@ -30,5 +30,11 @@ func init() {
 	Router.HandleFunc("/merchant", controller.AddMerchant).Methods("POST")
 	Router.HandleFunc("/merchant/{id:[0-9]+}", controller.DeleteMerchant).Methods("DELETE")
 	Router.HandleFunc("/merchant", controller.GetAllMerchants).Methods("GET")
+<<<<<<< HEAD
 
+=======
+	Router.HandleFunc("/product_category", controller.AddProductCategory).Methods("POST")
+	Router.HandleFunc("/product_category/{id:[0-9]+}", controller.DeleteProductCategory).Methods("DELETE")
+	Router.HandleFunc("/product_category", controller.GetAllProductCategory).Methods("GET")
+>>>>>>> 70a94b4de082a58cc8f742cb6dd36f725068e634
 }

@@ -1,15 +1,15 @@
 package controller
 
 import (
-	// "fmt"
+	"fmt"
 	// "errors"
-	"buychat/server/model"
+	"github.com/buychat/server/model"
 	// "database/sql"
 	"net/http"
 	"github.com/gorilla/mux"
 	"encoding/json"
-	"buychat/server/respond"
-	"buychat/server/database"
+	"github.com/buychat/server/respond"
+	"github.com/buychat/server/database"
 	"strconv"
 )
 
@@ -93,21 +93,38 @@ func UpdateProduct(w http.ResponseWriter, r *http.Request){
 
 func GetAllProduct(w http.ResponseWriter, r *http.Request){
 	arr_string_err = arr_string_err[:0]
-	products, errors := model.GetAllProduct(database.DB)	
+	query_params := r.URL.Query()
+	product_category_id := 0
+	if len(query_params) > 0 {
+		fmt.Println("dalam")
+		id, error := strconv.Atoi(query_params.Get("product_category_id"))
+		if error != nil {
+			id = 0
+		}
+		product_category_id = id
+	}
+	fmt.Println("asdadad")
+	products, errors := model.GetAllProduct(database.DB, product_category_id)
 	if len(errors)>0 {
 		for _,err := range errors{
 			arr_string_err = append(arr_string_err, err.Error())
 		}
+		fmt.Println("dalam error")
 		respond.RespondWithError(w, http.StatusBadRequest, arr_string_err)
 		return
 	}
-	respond.RespondWithJSON(w, http.StatusOK, products)
+	fmt.Println("luar error")
+	response := map[string]interface{} {
+		"count": len(products),
+		"data": products,
+	}
+	respond.RespondWithJSON(w, http.StatusOK, response)
 }
 
 func GetProduct(w http.ResponseWriter, r *http.Request){
 	arr_string_err = arr_string_err[:0]
 	vars := mux.Vars(r)
-	id, err := strconv.Atoi(vars["product_id"])
+	id, err := strconv.Atoi(vars["id"])
 	if err!= nil {
 		arr_string_err = append(arr_string_err,err.Error())
 		respond.RespondWithError(w, http.StatusBadRequest, arr_string_err)
