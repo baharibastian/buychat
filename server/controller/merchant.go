@@ -40,7 +40,12 @@ package controller
 		respond.RespondWithError(w, http.StatusBadRequest, arr_string_err)
 		return
 	}
-	respond.RespondWithJSON(w, http.StatusOK, merchants)
+	response := map[string]interface{} {
+		"count": len(merchants),
+		"data": merchants,
+	}
+	
+	respond.RespondWithJSON(w, http.StatusOK, response)
 }
 
  func GetMerchant(w http.ResponseWriter, r *http.Request){
